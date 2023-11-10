@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <direct.h>
 
 void time_process(){
 	STARTUPINFO si;
@@ -59,6 +60,8 @@ void list(){
 
 int main() {
     char cmd[100];
+    
+
 
     while (1) {
 
@@ -69,6 +72,11 @@ int main() {
         else if(strcmp(cmd, "test") == 0) aProcess();
         else if(strcmp(cmd, "mkdir") == 0) createDir();
         else if(strcmp(cmd, "ls") == 0) list();
+        else if(strcmp(cmd,"cd")){
+        	char* buffer;
+        	buffer = _getcwd( NULL, 0 );
+        	printf("%s >", buffer);
+		}
         else system(cmd);
     }
     return 0;
