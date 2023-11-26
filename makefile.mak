@@ -1,8 +1,8 @@
-MyShell: MyShell.o process.o
-	g++ -o MyShell.o process.o
+test: test.o process.o
+	g++ -o test test.o process.o
 
-MyShell.o: MyShell.c process.h
-	g++ -c MyShell.c
+test.o: test.cpp process.h
+	g++ -c test.cpp
 
-process.o: process.c process.h
-	g++ -c process.c
+process.o: process.cpp process.h
+	g++ -c process.cpp
