@@ -39,10 +39,6 @@ void createProcessInBackGroundMode(const char s[])
     printf("CreateProcess failed (%d).\n", GetLastError());
     return;
   }
-  // TerminateProcess(process[numProcess].pi.hProcess, 0);
-  // CloseHandle(process[numProcess].pi.hThread);
-  // CloseHandle(process[numProcess].pi.hProcess);
-  // process[numProcess].status = 0;
 }
 
 // Console control handler function
@@ -103,20 +99,24 @@ void createProcessInForeGroundMode(const char s[])
   WaitForSingleObject(process[numProcess].pi.hProcess, INFINITE);
   SetConsoleCtrlHandler(CtrlHandler, FALSE);
 
-  // Close process and thread handles.
-  CloseHandle(process[numProcess].pi.hThread);
-  CloseHandle(process[numProcess].pi.hProcess);
   return;
 }
 
 void listProcesses()
 {
+  if (numProcess == 0)
+    cout << "Empty !" << endl;
   for (int index = 1; index <= numProcess; index++)
   {
     DWORD dwExitCode;
     GetExitCodeProcess(process[index].pi.hProcess, &dwExitCode);
     if (dwExitCode != 259)
     {
+      // Terminate the process to end it immediately
+      TerminateProcess(process[index].pi.hProcess, 0);
+      // Close process and thread handles.
+      CloseHandle(process[index].pi.hThread);
+      CloseHandle(process[index].pi.hProcess);
       for (int jChange = index; jChange < numProcess; jChange++)
       {
         process[jChange] = process[jChange + 1];

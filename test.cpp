@@ -17,9 +17,13 @@ int main()
 		{
 			listProcesses();
 		}
-		else if (k == 'c')
+		else if (k == 'b')
 		{
 			createProcessInBackGroundMode("Timer.exe");
+		}
+		else if (k == 'f')
+		{
+			createProcessInForeGroundMode("Timer.exe");
 		}
 	}
 }
