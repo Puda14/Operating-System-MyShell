@@ -168,6 +168,29 @@ void killAllProcess(char op[])
     if (checkDetail == true)
       cout << " >> KILLED " << process[index].pi.hProcess << endl;
   }
-  cout << "All process have been killed !" << endl;
+  cout << " ===> All process have been killed !" << endl;
   numProcess = 0;
+}
+
+void kill(char op[])
+{
+  bool check = false;
+  for (int index = 1; index <= numProcess; index++)
+    if (strcmp(op, process[index].imageName) == 0)
+    {
+      check = true;
+      TerminateProcess(process[index].pi.hProcess, 0);
+      CloseHandle(process[index].pi.hThread);
+      CloseHandle(process[index].pi.hProcess);
+      for (int jChange = index; jChange < numProcess; jChange++)
+      {
+        process[jChange] = process[jChange + 1];
+      }
+      numProcess--;
+      index--;
+    }
+  if (check)
+    cout << " ===> KILLED " << op << endl;
+  else
+    cout << " ===> " << op << " NOT FOUND" << endl;
 }

@@ -69,8 +69,6 @@ int main()
 		makeStandardCmd(cmd);
 		getKey(cmd, key);
 		getOption(cmd, option);
-		// printf("key : %s\n", key);
-		// printf("option: %s\n", option);
 
 		if (strcmp(key, "l") == 0)
 		{
@@ -88,8 +86,9 @@ int main()
 		{
 			killAllProcess(option);
 		}
-		else
+		else if (strcmp(key, "kill") == 0)
 		{
+			kill(option);
 		}
 	}
 }
