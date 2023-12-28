@@ -105,34 +105,30 @@ void createProcessInForeGroundMode(const char s[])
   return;
 }
 
-int getMemUsage(PROCESS_INFORMATION pi){
+int getMemUsage(PROCESS_INFORMATION pi)
+{
 
   PROCESS_MEMORY_COUNTERS_EX pmc;
-  GetProcessMemoryInfo(pi.hProcess, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+  GetProcessMemoryInfo(pi.hProcess, (PROCESS_MEMORY_COUNTERS *)&pmc, sizeof(pmc));
   return pmc.WorkingSetSize / 1024; // convert Byte to Kilobyte
 }
 
 string formatMemUsage(SIZE_T memUsage)
 {
-    return to_string(memUsage) + " K";
+  return to_string(memUsage) + " K";
 }
 
 void listProcesses()
 {
-  if (numProcess == 0){
+  if (numProcess == 0)
+  {
     cout << "Empty !" << endl;
     return;
   }
 
-  cout << setw(20) << left << "Image Name" << 
-  setw(20) << left << "Process Handle" << 
-  setw(20) << left << "Process ID"<<
-  setw(20) << left << "Mem Usage"<< endl;
-  
-  cout << setw(20) << left << "==========" << 
-  setw(20) << left << "==============" << 
-  setw(20) << left << "=========="<<
-  setw(20) << left << "========="<< endl;  
+  cout << setw(20) << left << "Image Name" << setw(20) << left << "Process Handle" << setw(20) << left << "Process ID" << setw(20) << left << "Mem Usage" << endl;
+
+  cout << setw(20) << left << "==========" << setw(20) << left << "==============" << setw(20) << left << "==========" << setw(20) << left << "=========" << endl;
 
   for (int index = 1; index <= numProcess; index++)
   {
@@ -154,25 +150,23 @@ void listProcesses()
     }
     else
     {
-      cout << setw(20) << left << process[index].imageName << 
-      setw(20) << left << process[index].pi.hProcess <<
-      setw(20) << left << process[index].pi.dwProcessId <<
-      setw(20) << left << formatMemUsage(getMemUsage(process[index].pi)) << endl;   
+      cout << setw(20) << left << process[index].imageName << setw(20) << left << process[index].pi.hProcess << setw(20) << left << process[index].pi.dwProcessId << setw(20) << left << formatMemUsage(getMemUsage(process[index].pi)) << endl;
     }
   }
 }
 
-void killAllProcess(){
-    // bool checkDetail = false;
-    // if(strcmp(option, "-d")) checkDetail = true;
-    for (int index = 1; index <= numProcess; index++)
-    {
-        TerminateProcess(process[index].pi.hProcess, 0);
-        CloseHandle(process[index].pi.hThread);
-        CloseHandle(process[index].pi.hProcess);
-        // if (checkDetail == true) cout << "killed " << 
-        //   process[index].pi.hProcess << endl;
-    }
-    cout << "All process have been killed !" << endl;
-    numProcess = 0;
+void killAllProcess()
+{
+  // bool checkDetail = false;
+  // if(strcmp(option, "-d")) checkDetail = true;
+  for (int index = 1; index <= numProcess; index++)
+  {
+    TerminateProcess(process[index].pi.hProcess, 0);
+    CloseHandle(process[index].pi.hThread);
+    CloseHandle(process[index].pi.hProcess);
+    // if (checkDetail == true) cout << "killed " <<
+    //   process[index].pi.hProcess << endl;
+  }
+  cout << "All process have been killed !" << endl;
+  numProcess = 0;
 }

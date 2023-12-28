@@ -5,15 +5,75 @@
 #include "process.h"
 using namespace std;
 
+void makeStandardCmd(char s[])
+{
+	printf("start\n");
+	while (s[0] == ' ')
+		strcpy(&s[0], &s[1]);
+	while (s[strlen(s) - 1] == ' ')
+		strcpy(&s[strlen(s) - 1], &s[strlen(s)]);
+	for (int i = 0; i < strlen(s); i++)
+		if ((s[i] == ' ') && (s[i + 1] == ' '))
+		{
+			strcpy(&s[i], &s[i + 1]);
+			i--;
+		}
+	printf("done\n");
+}
+
+void getKey(char s[], char key[])
+{
+
+	int spaceIndex = 0;
+
+	// Find the position of the first space in the string s
+	while (s[spaceIndex] != ' ' && s[spaceIndex] != '\0')
+	{
+		key[spaceIndex] = s[spaceIndex];
+		spaceIndex++;
+	}
+	key[spaceIndex] = '\0';
+}
+
+void getOption(char s[], char option[])
+{
+
+	// Find the position of the first space in the string s
+	int spaceIndex = 0;
+	while (s[spaceIndex] != ' ' && s[spaceIndex] != '\0')
+	{
+		spaceIndex++;
+	}
+
+	// Copy the content from position spaceIndex + 1 to the end of the string into option
+	int optionIndex = 0;
+	while (s[spaceIndex + 1] != '\0')
+	{
+		option[optionIndex] = s[spaceIndex + 1];
+		spaceIndex++;
+		optionIndex++;
+	}
+	option[optionIndex] = '\0'; // End the option string
+}
+
 int main()
 {
-	printf("Check!\n");
+
+	printf("Start!\n");
 
 	while (1)
 	{
-		char key[101];
-		char option[101];
-		scanf("%s",key);
+		char key[101] = "\0";
+		char option[101] = "\0";
+		char cmd[101] = "\0";
+
+		scanf("%[^\n]%*c", cmd);
+		makeStandardCmd(cmd);
+		getKey(cmd, key);
+		getOption(cmd, option);
+		printf("key : %s\n", key);
+		printf("option: %s\n", option);
+
 		if (strcmp(key, "l") == 0)
 		{
 			listProcesses();
@@ -26,11 +86,12 @@ int main()
 		{
 			createProcessInForeGroundMode("Timer.exe");
 		}
-		else if (strcmp(key, "killA") == 0){
+		else if (strcmp(key, "killA") == 0)
+		{
 			killAllProcess();
 		}
-		else {
-
+		else
+		{
 		}
 	}
 }
