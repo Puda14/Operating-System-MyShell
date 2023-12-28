@@ -21,5 +21,6 @@ struct ProcessInfo
 void createProcessInBackGroundMode(const char s[]);
 void createProcessInForeGroundMode(const char s[]);
 void listProcesses();
+void killAllProcess();
 
 #endif

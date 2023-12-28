@@ -11,19 +11,26 @@ int main()
 
 	while (1)
 	{
-		char k;
-		cin >> k;
-		if (k == 'l')
+		char key[101];
+		char option[101];
+		scanf("%s",key);
+		if (strcmp(key, "l") == 0)
 		{
 			listProcesses();
 		}
-		else if (k == 'b')
+		else if (strcmp(key, "b") == 0)
 		{
 			createProcessInBackGroundMode("Timer.exe");
 		}
-		else if (k == 'f')
+		else if (strcmp(key, "f") == 0)
 		{
 			createProcessInForeGroundMode("Timer.exe");
+		}
+		else if (strcmp(key, "killA") == 0){
+			killAllProcess();
+		}
+		else {
+
 		}
 	}
 }
