@@ -155,17 +155,18 @@ void listProcesses()
   }
 }
 
-void killAllProcess()
+void killAllProcess(char op[])
 {
-  // bool checkDetail = false;
-  // if(strcmp(option, "-d")) checkDetail = true;
+  bool checkDetail = false;
+  if (strcmp(op, "-d") == 0)
+    checkDetail = true;
   for (int index = 1; index <= numProcess; index++)
   {
     TerminateProcess(process[index].pi.hProcess, 0);
     CloseHandle(process[index].pi.hThread);
     CloseHandle(process[index].pi.hProcess);
-    // if (checkDetail == true) cout << "killed " <<
-    //   process[index].pi.hProcess << endl;
+    if (checkDetail == true)
+      cout << " >> KILLED " << process[index].pi.hProcess << endl;
   }
   cout << "All process have been killed !" << endl;
   numProcess = 0;

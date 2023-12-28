@@ -7,7 +7,6 @@ using namespace std;
 
 void makeStandardCmd(char s[])
 {
-	printf("start\n");
 	while (s[0] == ' ')
 		strcpy(&s[0], &s[1]);
 	while (s[strlen(s) - 1] == ' ')
@@ -18,7 +17,6 @@ void makeStandardCmd(char s[])
 			strcpy(&s[i], &s[i + 1]);
 			i--;
 		}
-	printf("done\n");
 }
 
 void getKey(char s[], char key[])
@@ -71,8 +69,8 @@ int main()
 		makeStandardCmd(cmd);
 		getKey(cmd, key);
 		getOption(cmd, option);
-		printf("key : %s\n", key);
-		printf("option: %s\n", option);
+		// printf("key : %s\n", key);
+		// printf("option: %s\n", option);
 
 		if (strcmp(key, "l") == 0)
 		{
@@ -88,7 +86,7 @@ int main()
 		}
 		else if (strcmp(key, "killA") == 0)
 		{
-			killAllProcess();
+			killAllProcess(option);
 		}
 		else
 		{
