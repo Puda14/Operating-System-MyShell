@@ -116,3 +116,12 @@ void runExe(char* exePath, char* option){
         perror("Error");
     }
 }
+
+void runBat(char* batchFilePath){
+
+    if (system(batchFilePath) == 0) {
+        printf("Run Successfully\n");
+    } else {
+        perror("Error");
+    }
+}

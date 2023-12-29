@@ -129,6 +129,9 @@ int main()
     		}
 
 			if(strcmp(type, "exe") == 0) runExe(file, option);
+			else if(strcmp(type, "bat") == 0){
+				runBat(file);
+			}
 		}
 		else{
 		}
