@@ -95,5 +95,9 @@ int main()
 		{
 			kill(option);
 		}
+		else if (strcmp(key, "ls") == 0)
+		{
+			listFilesAndDirectories();
+		}
 	}
 }
