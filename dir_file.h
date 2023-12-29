@@ -5,4 +5,5 @@ void listFilesAndDirectories();
 void cd(const char *directoryName, char *buffer);
 void changeDrive(char driveLetter, char *buffer);
 void makeDir(char* dirName);
+void removeDir(const char* dirName);
 #endif

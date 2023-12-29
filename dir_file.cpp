@@ -46,8 +46,12 @@ void makeDir(char* dirName)
         printf("Unable to create directory %s\n", dirName);
 }
 
-void rmdir()
-{
+void removeDir(const char* dirName) {
+    
+    if (rmdir(dirName) == 0)
+        printf("Directory removed successfully\n");
+    else
+        printf("Unable to remove directory %s\n", dirName);
 }
 
 void listFilesAndDirectories() {

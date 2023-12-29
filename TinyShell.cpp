@@ -111,5 +111,8 @@ int main()
 		else if(strcmp(key, "mdir") == 0){
 			makeDir(option);
 		}
+		else if(strcmp(key, "rmdir") == 0){
+			removeDir(option);
+		}
 	}
 }
