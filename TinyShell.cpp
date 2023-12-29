@@ -57,6 +57,8 @@ void getOption(char s[], char option[])
 	option[optionIndex] = '\0'; // End the option string
 }
 
+void help();
+
 int main()
 {
 
@@ -153,6 +155,9 @@ int main()
 		else if(strcmp(key, "delf") == 0){
 			deleteFile(option);
 		}
+		else if(strcmp(key, "help") == 0){
+			help();
+		}
 		else if(strcmp(key, "exit") == 0){
 			return 0;
 		}
@@ -163,4 +168,26 @@ int main()
 			printf("\x1b[0m");
 		}
 	}
+}
+
+void help() {
+	printf("\x1b[34m");
+    printf("Tiny Shell Usage:\n");
+    printf("  list                : List all processes\n");
+    printf("  b                   : Create process in background mode\n");
+    printf("  f                   : Create process in foreground mode\n");
+    printf("  killA [-d]          : Kill all processes (optionally display details with -d)\n");
+    printf("  kill [process name] : Kill a specific process\n");
+    printf("  ls                  : List files and directories in the current directory\n");
+    printf("  cd [directory]      : Change current directory to [directory]\n");
+    printf("  clear               : Clear the console screen\n");
+    printf("  [Drive]:            : Change current drive to [Drive]\n");
+    printf("  mdir [directory]    : Create a new directory named [directory]\n");
+    printf("  rmdir [directory]   : Remove the directory named [directory]\n");
+    printf("  .\\file [-f|-b]      : Execute a file specified by .\\file with optional -f (foreground) or -b (background) option\n");
+    printf("  echo [option]       : Display [option] or read an environment variable\n");
+    printf("  crf [filename]      : Create a new file named [filename]\n");
+    printf("  delf [filename]     : Delete the file named [filename]\n");
+    printf("  exit                : Exit the shell\n");
+	printf("\x1b[0m");
 }

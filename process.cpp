@@ -128,7 +128,9 @@ void listProcesses()
 {
   if (numProcess == 0)
   {
+    printf("\x1b[33m");
     cout << "Empty !" << endl;
+    printf("\x1b[0m");
     return;
   }
 
