@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <direct.h>
 #include "process.h"
+#include "dir_file.h"
 using namespace std;
 
 void makeStandardCmd(char s[])
@@ -57,10 +59,13 @@ void getOption(char s[], char option[])
 int main()
 {
 
-	printf("Start!\n");
+	char *buffer = _getcwd(NULL, 0);
 
 	while (1)
 	{
+
+		printf("%s>", buffer);
+
 		char key[101] = "\0";
 		char option[101] = "\0";
 		char cmd[101] = "\0";
