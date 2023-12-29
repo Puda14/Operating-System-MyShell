@@ -12,10 +12,6 @@ struct ProcessInfo
   char sessionName[101];
   DWORD sessionNumber;
   SIZE_T memUsage;
-  FILETIME creationTime;
-  FILETIME exitTime;
-  FILETIME kernelTime;
-  FILETIME userTime;
 };
 
 void createProcessInBackGroundMode(const char s[]);
@@ -23,5 +19,6 @@ void createProcessInForeGroundMode(const char s[]);
 void listProcesses();
 void killAllProcess(char op[]);
 void kill(char op[]);
-
+void stop(char* pName);
+void resume(char* pName);
 #endif

@@ -98,6 +98,14 @@ int main()
 		{
 			kill(option);
 		}
+		else if (strcmp(key, "stop") == 0)
+		{
+			stop(option);
+		}
+		else if (strcmp(key, "resume") == 0)
+		{
+			resume(option);
+		}
 		else if (strcmp(key, "ls") == 0)
 		{
 			listFilesAndDirectories();
