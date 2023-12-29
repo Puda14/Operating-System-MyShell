@@ -12,6 +12,7 @@
 #include <direct.h>
 #include <unistd.h>
 #include "dir_file.h"
+#include "process.h"
 
 using namespace std;
 
@@ -47,7 +48,7 @@ void makeDir(char* dirName)
 }
 
 void removeDir(const char* dirName) {
-    
+
     if (rmdir(dirName) == 0)
         printf("Directory removed successfully\n");
     else
@@ -104,4 +105,14 @@ void listFilesAndDirectories() {
 
     // Close the directory
     closedir(dir);
+}
+
+void runExe(char* exePath, char* option){
+    if (strcmp(option, "-f") == 0) {
+        createProcessInForeGroundMode(exePath);
+    } else if (strcmp(option, "-b") == 0 || strcmp(option, "\0") == 0) {
+        createProcessInBackGroundMode(exePath);
+    } else {
+        perror("Error");
+    }
 }

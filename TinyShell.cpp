@@ -114,5 +114,23 @@ int main()
 		else if(strcmp(key, "rmdir") == 0){
 			removeDir(option);
 		}
+		else if(key[0] == '.' && key[1] == '\\'){
+
+			char *file;
+			strcpy(file, key+2);
+
+			char* lastDot = strrchr(key, '.');
+			char type[10];// Type of file
+			
+			if (lastDot != nullptr) {
+        		sscanf(lastDot + 1, "%99s", type);  
+   			} else {
+        		printf("Unable to read file type");
+    		}
+
+			if(strcmp(type, "exe") == 0) runExe(file, option);
+		}
+		else{
+		}
 	}
 }
