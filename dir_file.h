@@ -3,4 +3,5 @@
 
 void listFilesAndDirectories();
 void cd(const char *directoryName, char *buffer);
+void changeDrive(char driveLetter, char *buffer);
 #endif

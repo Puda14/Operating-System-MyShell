@@ -105,5 +105,8 @@ int main()
 		else if(strcmp(key, "clear") == 0){
 			system("cls");
 		}
+		else if('A'<=key[0]&&key[0]<='Z'&&key[1] == ':'){
+			changeDrive(key[0], buffer);
+		}
 	}
 }

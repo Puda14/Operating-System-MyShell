@@ -18,6 +18,21 @@ void cd(const char *directoryName, char *buffer) {
     }
 }
 
+void changeDrive(char driveLetter, char *buffer) {
+    char path[4];
+    path[0] = driveLetter;
+    path[1] = ':';
+    path[2] = '\\';
+    path[3] = '\0';
+
+    if (_chdir(path) == 0) {
+        _getcwd(buffer, _MAX_PATH);
+    } else {
+        perror("Error");
+    }
+}
+
+
 void mkdir()
 {
 }
