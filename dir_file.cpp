@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
 #include <iostream>
 #include <iomanip>
 #include <direct.h>
+#include <unistd.h>
 #include "dir_file.h"
 
 using namespace std;
@@ -33,8 +35,12 @@ void changeDrive(char driveLetter, char *buffer) {
 }
 
 
-void mkdir()
+void makeDir(char* dirName)    
 {
+    if (mkdir(dirName) == 0)
+        printf("Directory created successfully\n");
+    else
+        printf("Unable to create directory %s\n", dirName);
 }
 
 void rmdir()

@@ -108,5 +108,8 @@ int main()
 		else if('A'<=key[0]&&key[0]<='Z'&&key[1] == ':'){
 			changeDrive(key[0], buffer);
 		}
+		else if(strcmp(key, "mdir") == 0){
+			makeDir(option);
+		}
 	}
 }
