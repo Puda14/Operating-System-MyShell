@@ -3,6 +3,9 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <cstring>
+#include <ctime>
+#include <string>
 #include <time.h>
 #include <iostream>
 #include <iomanip>
@@ -47,17 +50,15 @@ void rmdir()
 {
 }
 
-void listFilesAndDirectories()
-{
+void listFilesAndDirectories() {
     DIR *dir;
     struct dirent *entry;
     struct stat fileStat;
 
-    // Open Current Directory
+    // Open the current directory
     dir = opendir(".");
 
-    if (dir == NULL)
-    {
+    if (dir == NULL) {
         perror("Error");
         return;
     }
@@ -68,6 +69,7 @@ void listFilesAndDirectories()
     const int lengthWidth = 15;
     const int nameWidth = 30;
 
+    // Print header row
     cout << left << setw(modeWidth) << "Mode"
          << setw(timeWidth) << "LastWriteTime"
          << setw(lengthWidth) << "Length"
@@ -77,9 +79,8 @@ void listFilesAndDirectories()
          << setw(lengthWidth) << "------"
          << setw(nameWidth) << "-----" << endl;
 
-    // Read and Show File and Dir
-    while ((entry = readdir(dir)) != NULL)
-    {
+    // Read and show file and directory information
+    while ((entry = readdir(dir)) != NULL) {
         // Get file/directory information
         stat(entry->d_name, &fileStat);
 
@@ -87,14 +88,16 @@ void listFilesAndDirectories()
         string timeStr = ctime(&fileStat.st_mtime);
         timeStr = timeStr.substr(0, timeStr.length() - 1); // Remove the newline character at the end
 
+        // Use st_size for file size in bytes
+        double fileSize = fileStat.st_size;
+
         // Print file/directory information
         cout << oct << left << setw(modeWidth) << fileStat.st_mode
              << setw(timeWidth) << timeStr
-             << setw(lengthWidth) << fileStat.st_size
-             << setw(nameWidth) << entry->d_name << endl
-             << endl;
+             << fixed << setw(lengthWidth) << setprecision(0) << fileSize
+             << setw(nameWidth) << entry->d_name << endl;
     }
 
-    // Close Dir
+    // Close the directory
     closedir(dir);
 }
