@@ -143,13 +143,17 @@ int main()
 					strcpy(&option[strlen(option) - 1], &option[strlen(option)]);
 				readEnvironmentVariable(option);
 			}
-			else if(option == ">>"){
-				printf("...");
-			}
 			else{
 				printf("%s\n", option);
 			}
-
+		}
+		else if(strcmp(key, "crf") == 0){
+			createFile(option);
+		}
+		else if(strcmp(key, "delf") == 0){
+			deleteFile(option);
+		}
+		else{
 
 		}
 	}

@@ -125,3 +125,24 @@ void runBat(char* batchFilePath){
         perror("Error");
     }
 }
+
+void createFile(char* fileName){
+    
+    FILE *file = fopen(fileName, "w");
+
+    if (file != NULL) {
+        printf("File created successfully: %s\n", fileName);
+        fclose(file);
+    } else {
+        perror("Error creating file");
+    }
+}
+
+void deleteFile(char* fileName){
+
+    if (remove(fileName) == 0) {
+        printf("File deleted successfully: %s\n", fileName);
+    } else {
+        perror("Error deleting file");
+    }
+}

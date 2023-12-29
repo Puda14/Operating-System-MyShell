@@ -8,4 +8,6 @@ void makeDir(char* dirName);
 void removeDir(const char* dirName);
 void runExe(char* exePath, char* option);
 void runBat(char* batchFilePath);
+void createFile(char* fileName);
+void deleteFile(char* fileName);
 #endif
