@@ -99,5 +99,11 @@ int main()
 		{
 			listFilesAndDirectories();
 		}
+		else if(strcmp(key, "cd") == 0){
+			cd(option, buffer);
+		}
+		else if(strcmp(key, "clear") == 0){
+			system("cls");
+		}
 	}
 }

@@ -5,12 +5,17 @@
 #include <time.h>
 #include <iostream>
 #include <iomanip>
+#include <direct.h>
 #include "dir_file.h"
 
 using namespace std;
 
-void cd(char *curDir)
-{
+void cd(const char *directoryName, char *buffer) {
+    if (_chdir(directoryName) == 0) {
+        _getcwd(buffer, _MAX_PATH);
+    } else {
+        perror("Error");
+    }
 }
 
 void mkdir()
