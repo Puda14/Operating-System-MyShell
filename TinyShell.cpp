@@ -5,6 +5,7 @@
 #include <direct.h>
 #include "process.h"
 #include "dir_file.h"
+#include "env.h"
 using namespace std;
 
 void makeStandardCmd(char s[])
@@ -133,7 +134,23 @@ int main()
 				runBat(file);
 			}
 		}
-		else{
+		else if(strcmp(key, "echo") == 0){
+			
+			if(option[0] == '%' && option[strlen(option)-1] == '%'){
+				while (option[0] == '%')
+					strcpy(&option[0], &option[1]);
+				while (option[strlen(option) - 1] == '%')
+					strcpy(&option[strlen(option) - 1], &option[strlen(option)]);
+				readEnvironmentVariable(option);
+			}
+			else if(option == ">>"){
+				printf("...");
+			}
+			else{
+				printf("%s\n", option);
+			}
+
+
 		}
 	}
 }
