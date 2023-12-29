@@ -196,6 +196,8 @@ void help() {
     printf("  echo [option]       : Display [option] or read an environment variable\n");
     printf("  crf [filename]      : Create a new file named [filename]\n");
     printf("  delf [filename]     : Delete the file named [filename]\n");
+	printf("  stop [processname]  : Stop the process named [processname]\n");
+    printf("  resume [processname]: Resume the process named [processname]\n");
     printf("  exit                : Exit the shell\n");
 	printf("\x1b[0m");
 }
