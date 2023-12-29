@@ -76,7 +76,7 @@ int main()
 		getKey(cmd, key);
 		getOption(cmd, option);
 
-		if (strcmp(key, "l") == 0)
+		if (strcmp(key, "list") == 0)
 		{
 			listProcesses();
 		}
@@ -153,8 +153,14 @@ int main()
 		else if(strcmp(key, "delf") == 0){
 			deleteFile(option);
 		}
+		else if(strcmp(key, "exit") == 0){
+			return 0;
+		}
 		else{
-
+			printf("\x1b[31m");
+			printf("The term %s is not recognized as the name of a cmdlet\n", key);
+			printf("You should use \"help\"\n");
+			printf("\x1b[0m");
 		}
 	}
 }

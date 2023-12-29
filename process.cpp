@@ -39,7 +39,9 @@ void createProcessInBackGroundMode(const char s[])
                      &process[numProcess].pi) // Pointer to PROCESS_INFORMATION structure
   )
   {
+    printf("\x1b[31m");
     printf("CreateProcess failed (%d).\n", GetLastError());
+    printf("\x1b[0m");
     return;
   }
 }
@@ -79,7 +81,9 @@ void createProcessInForeGroundMode(const char s[])
   // Register the Ctrl+C handler function
   if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE))
   {
+    printf("\x1b[31m");
     printf("SetConsoleCtrlHandler failed (%d).\n", GetLastError());
+    printf("\x1b[0m");
     return;
   }
   if (!CreateProcess(s,     // No module name (use command line)
@@ -94,7 +98,9 @@ void createProcessInForeGroundMode(const char s[])
                      &process[numProcess].pi) // Pointer to PROCESS_INFORMATION structure
   )
   {
+    printf("\x1b[31m");
     printf("CreateProcess failed (%d).\n", GetLastError());
+    printf("\x1b[0m");
     return;
   }
 
@@ -157,6 +163,7 @@ void listProcesses()
 
 void killAllProcess(char op[])
 {
+  printf("\x1b[33m");
   bool checkDetail = false;
   if (strcmp(op, "-d") == 0)
     checkDetail = true;
@@ -169,6 +176,7 @@ void killAllProcess(char op[])
       cout << " >> KILLED " << process[index].pi.hProcess << endl;
   }
   cout << " ===> All process have been killed !" << endl;
+  printf("\x1b[0m");
   numProcess = 0;
 }
 
@@ -189,8 +197,10 @@ void kill(char op[])
       numProcess--;
       index--;
     }
+  printf("\x1b[33m");
   if (check)
     cout << " ===> KILLED " << op << endl;
   else
     cout << " ===> " << op << " NOT FOUND" << endl;
+  printf("\x1b[0m");
 }

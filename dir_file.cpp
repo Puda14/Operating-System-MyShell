@@ -20,7 +20,9 @@ void cd(const char *directoryName, char *buffer) {
     if (_chdir(directoryName) == 0) {
         _getcwd(buffer, _MAX_PATH);
     } else {
-        perror("Error");
+        printf("\x1b[31m");
+        perror("Can't Change Directory");
+        printf("\x1b[0m");
     }
 }
 
@@ -34,25 +36,41 @@ void changeDrive(char driveLetter, char *buffer) {
     if (_chdir(path) == 0) {
         _getcwd(buffer, _MAX_PATH);
     } else {
-        perror("Error");
+        printf("\x1b[31m");
+        perror("Can't Change Drive");
+        printf("\x1b[0m");
     }
 }
 
 
 void makeDir(char* dirName)    
 {
-    if (mkdir(dirName) == 0)
+    if (mkdir(dirName) == 0){
+        printf("\x1b[32m");
         printf("Directory created successfully\n");
-    else
+        printf("\x1b[0m");
+    }
+    else{
+        printf("\x1b[31m");
         printf("Unable to create directory %s\n", dirName);
+        printf("\x1b[0m");
+    }
+        
 }
 
 void removeDir(const char* dirName) {
 
-    if (rmdir(dirName) == 0)
+    if (rmdir(dirName) == 0){
+        printf("\x1b[32m");
         printf("Directory removed successfully\n");
-    else
+        printf("\x1b[0m");
+    }
+    else{
+        printf("\x1b[31m");
         printf("Unable to remove directory %s\n", dirName);
+        printf("\x1b[0m");
+    }
+       
 }
 
 void listFilesAndDirectories() {
@@ -64,7 +82,9 @@ void listFilesAndDirectories() {
     dir = opendir(".");
 
     if (dir == NULL) {
+        printf("\x1b[31m");
         perror("Error");
+        printf("\x1b[0m");
         return;
     }
 
@@ -113,16 +133,22 @@ void runExe(char* exePath, char* option){
     } else if (strcmp(option, "-b") == 0 || strcmp(option, "\0") == 0) {
         createProcessInBackGroundMode(exePath);
     } else {
-        perror("Error");
+        printf("\x1b[31m");
+        perror("Can't Run File");
+        printf("\x1b[0m");
     }
 }
 
 void runBat(char* batchFilePath){
 
     if (system(batchFilePath) == 0) {
+        printf("\x1b[32m");
         printf("Run Successfully\n");
+        printf("\x1b[0m");
     } else {
+        printf("\x1b[31m");
         perror("Error");
+        printf("\x1b[0m");
     }
 }
 
@@ -131,18 +157,26 @@ void createFile(char* fileName){
     FILE *file = fopen(fileName, "w");
 
     if (file != NULL) {
+        printf("\x1b[32m");
         printf("File created successfully: %s\n", fileName);
+        printf("\x1b[0m");
         fclose(file);
     } else {
+        printf("\x1b[31m");
         perror("Error creating file");
+        printf("\x1b[0m");
     }
 }
 
 void deleteFile(char* fileName){
 
     if (remove(fileName) == 0) {
+        printf("\x1b[32m");
         printf("File deleted successfully: %s\n", fileName);
+        printf("\x1b[0m");
     } else {
-        perror("Error deleting file");
+	    printf("\x1b[31m");
+        perror("Error deleting file");		
+		printf("\x1b[0m");
     }
 }
