@@ -3,6 +3,8 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <time.h>
+#include <iostream>
+#include <iomanip>
 #include "dir_file.h"
 
 using namespace std;
@@ -34,8 +36,20 @@ void listFilesAndDirectories()
         return;
     }
 
-    printf("%-10s%-25s%-15s%-30s\n", "Mode", "LastWriteTime", "Length", "Name");
-    printf("%-10s%-25s%-15s%-30s\n", "----", "-------------", "------", "-----");
+    // Set width for formatting
+    const int modeWidth = 10;
+    const int timeWidth = 30;
+    const int lengthWidth = 15;
+    const int nameWidth = 30;
+
+    cout << left << setw(modeWidth) << "Mode"
+         << setw(timeWidth) << "LastWriteTime"
+         << setw(lengthWidth) << "Length"
+         << setw(nameWidth) << "Name" << endl;
+    cout << left << setw(modeWidth) << "----"
+         << setw(timeWidth) << "-------------"
+         << setw(lengthWidth) << "------"
+         << setw(nameWidth) << "-----" << endl;
 
     // Read and Show File and Dir
     while ((entry = readdir(dir)) != NULL)
@@ -43,8 +57,16 @@ void listFilesAndDirectories()
         // Get file/directory information
         stat(entry->d_name, &fileStat);
 
+        // Convert ctime to a string for better formatting
+        string timeStr = ctime(&fileStat.st_mtime);
+        timeStr = timeStr.substr(0, timeStr.length() - 1); // Remove the newline character at the end
+
         // Print file/directory information
-        printf("%-10o%-25s%-15ld%-30s\n\n", fileStat.st_mode, ctime(&fileStat.st_mtime), fileStat.st_size, entry->d_name);
+        cout << oct << left << setw(modeWidth) << fileStat.st_mode
+             << setw(timeWidth) << timeStr
+             << setw(lengthWidth) << fileStat.st_size
+             << setw(nameWidth) << entry->d_name << endl
+             << endl;
     }
 
     // Close Dir
