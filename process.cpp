@@ -207,10 +207,13 @@ void kill(char op[])
   printf("\x1b[0m");
 }
 
-void stop(char* pName){
+void stop(char *pName)
+{
   bool check = false;
-  for (int index = 1; index <= numProcess; index++){
-    if(strcmp(process[index].imageName, pName) == 0){
+  for (int index = 1; index <= numProcess; index++)
+  {
+    if (strcmp(process[index].imageName, pName) == 0)
+    {
       check = true;
       SuspendThread(process[index].pi.hThread);
       printf("\x1b[33m");
@@ -219,17 +222,21 @@ void stop(char* pName){
       break;
     }
   }
-  if(!check){
+  if (!check)
+  {
     printf("\x1b[31m");
     printf("%s NOT FOUND\n", pName);
     printf("\x1b[0m");
   }
 }
 
-void resume(char* pName){
+void resume(char *pName)
+{
   bool check = false;
-  for (int index = 1; index <= numProcess; index++){
-    if(strcmp(process[index].imageName, pName) == 0){
+  for (int index = 1; index <= numProcess; index++)
+  {
+    if (strcmp(process[index].imageName, pName) == 0)
+    {
       check = true;
       ResumeThread(process[index].pi.hThread);
       printf("\x1b[33m");
@@ -238,7 +245,8 @@ void resume(char* pName){
       break;
     }
   }
-  if(!check){
+  if (!check)
+  {
     printf("\x1b[31m");
     printf("%s NOT FOUND\n", pName);
     printf("\x1b[0m");
