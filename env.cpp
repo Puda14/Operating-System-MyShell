@@ -2,13 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void readEnvironmentVariable(const char* variableName) {
-    char* value = getenv(variableName);
+void readEnvironmentVariable(const char *variableName)
+{
+    char *value = getenv(variableName);
 
-    if (value != NULL) {
+    if (value != NULL)
+    {
         printf("\x1b[32m");
         printf("%s=%s\n", variableName, value);
-    } else {
+    }
+    else
+    {
         printf("\x1b[31m");
         printf("%s is not set.\n", variableName);
     }
